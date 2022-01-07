@@ -8,7 +8,9 @@ pipeline {
         }
         stage('deploy') {
           steps {
-            sh 'sam deploy --no-confirm-changeset --no-fail-on-empty-changeset'
+            withAWS(credentials: 'sam-jenkins-credentials', region: 'us-east-1'){
+              sh 'sam deploy --no-confirm-changeset --no-fail-on-empty-changeset'
+            }
           }
         }
     }
