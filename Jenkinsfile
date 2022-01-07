@@ -3,9 +3,13 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'node --version'
                 sh 'sam build'
             }
+        }
+        stage('deploy') {
+          steps {
+            sh 'sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
+          }
         }
     }
 }
