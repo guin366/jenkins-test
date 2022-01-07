@@ -4,7 +4,7 @@ pipeline {
         stage('build') {
             steps {
                 sh 'node --version'
-                sh 'sam build --build-dir ./.aws-sam/build'
+                sh 'sam build'
             }
         }
     }
