@@ -72,6 +72,9 @@ typings/
 .env
 .env.test
 
+#aws samcli build files
+.aws-sam/
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 
