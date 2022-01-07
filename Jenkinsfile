@@ -4,8 +4,7 @@ pipeline {
         stage('build') {
             steps {
                 sh 'node --version'
-                sh 'sam build'
-                stash includes: '**/.aws-sam/**/*', name: 'aws-sam'
+                sh 'sudo sam build'
             }
         }
     }
