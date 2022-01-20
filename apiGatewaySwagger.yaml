@@ -1,4 +1,8 @@
 swagger: "2.0"
+info:
+  description: 'This is a test API'
+  version: '1.0.0'
+  title: 'SAMCLI API test'
 basePath: "/Dev"
 paths:
   /hello:
@@ -10,6 +14,13 @@ paths:
       responses:
         "200":
           description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
       x-amazon-apigateway-integration:
         type: "aws"
         httpMethod: "POST"
@@ -18,6 +29,10 @@ paths:
         responses:
           default:
             statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
             responseTemplates:
               application/json: "##  See http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html\n\
                 ##  This template will pass through all parameters including path,\
@@ -48,3 +63,36 @@ paths:
         requestTemplates:
           application/json: "{\n    \"body\": $input.json(\"$\")\n}"
         passthroughBehavior: "when_no_templates"
+    options:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+      x-amazon-apigateway-integration:
+        type: "mock"
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+definitions:
+  Empty:
+    type: object
+    title: Empty Schema

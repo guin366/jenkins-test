@@ -15,6 +15,7 @@ Resources:
     Type: AWS::Serverless::Api
     Auth:
       ApiKeyRequired: false
+    Cors: "'*'"
     Properties:
       StageName: Dev
       DefinitionBody: 
